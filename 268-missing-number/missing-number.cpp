@@ -5,6 +5,7 @@ public:
         int n=nums.size();
         for(int i=0;i<n;i++){
             res=res^nums[i];
+            
         }
         for(int i=0;i<=n;i++){
             res=res^i;
