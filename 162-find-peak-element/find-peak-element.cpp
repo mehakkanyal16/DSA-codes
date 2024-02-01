@@ -8,6 +8,20 @@ public:
     //         }
     //     }
     //     return n-1;
-    return max_element(nums.begin(),nums.end())-nums.begin();
+    // return max_element(nums.begin(),nums.end())-nums.begin();
+    int start=0;
+    int n=nums.size();
+    int end=n-1;
+    while(start<end){
+        int mid=start+(end-start)/2;
+        if(nums[mid]<nums[mid+1]){
+            start=mid+1;
+        }
+        else{
+            end=mid;
+        }
+    }
+        return start;
+    
     }
 };
