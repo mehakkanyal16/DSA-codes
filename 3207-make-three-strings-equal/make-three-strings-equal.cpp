@@ -15,7 +15,7 @@ public:
                 break;
             }
         }
-        // cout<<max(mx,c)<<endl;
+        cout<<max(mx,c)<<endl;
         return s1.size()+s2.size()+s3.size()-3*c;
     
     }
