@@ -1,8 +1,8 @@
 class Solution {
 public:
- vector<string>v;
+  vector<string>v;
     void solve(int i , int j , int n , string s) {
-        if(i == j and i == n) {
+        if(i == n and j == n) {
             v.push_back(s);
             return;
         }
@@ -10,6 +10,7 @@ public:
         if(j < i) solve(i  , j + 1 , n , s + ')');
 
     }
+
     vector<string> generateParenthesis(int n) {
            solve(0, 0 , n , "");
         return v;
