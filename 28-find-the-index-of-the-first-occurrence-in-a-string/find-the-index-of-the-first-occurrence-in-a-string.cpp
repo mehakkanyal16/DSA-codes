@@ -9,6 +9,9 @@ public:
         // else{
         //     return -1;
         // }
+        if(needle.empty()){
+           return 0;
+       } 
         if(needle.length()>haystack.length()){
             return -1;
         }
