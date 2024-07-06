@@ -6,6 +6,11 @@ public:
         return result;
         
     }
+      void swap(int& a, int& b) {
+        int temp = a;
+        a = b;
+        b = temp;
+    }  
     void permuteRec(vector<int>&nums,int currentIndex,vector<vector<int>>&result){
         if(currentIndex==nums.size()-1){
             result.push_back(nums);
