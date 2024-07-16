@@ -18,7 +18,7 @@ public:
             st.insert(arr[i]);
 
         }
-        // int k=st.size();
+        int k=st.size();
         int j=0;
         for(auto i :st){
             arr[j]=i;
