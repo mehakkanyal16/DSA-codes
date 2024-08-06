@@ -29,22 +29,30 @@ class Solution {
         // }
         // return ans;
 
-        if(head==null){
-            return -1;
-        }
-        Stack<Integer>st=new Stack<>();
+        // if(head==null){
+        //     return -1;
+        // }
+        // Stack<Integer>st=new Stack<>();
+        // while(head!=null){
+        //     st.push(head.val);
+        //     head=head.next;
+        // }
+        // int ans=0;
+        // int i=0;
+        // while(!st.empty()){
+        //     int num=st.pop();
+        //     ans+=num*Math.pow(2,i);
+        //     i++;
+        // }
+        // return ans;
+
+
+        int res=0;
         while(head!=null){
-            st.push(head.val);
+            res=res*2+(int)head.val;
             head=head.next;
         }
-        int ans=0;
-        int i=0;
-        while(!st.empty()){
-            int num=st.pop();
-            ans+=num*Math.pow(2,i);
-            i++;
-        }
-        return ans;
+        return res;
 
 
         
