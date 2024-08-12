@@ -7,16 +7,6 @@ class Solution {
                 st.push(num);
             }
             else {
-                // int last=st.pop();
-                // int neg=Math.abs(num);
-                // if(neg>last){
-                //     st.push(neg);
-                // }
-                // else if(last>neg){
-                //     st.push(last);
-                // }
-
-                // if one positive and one negative
               while(!st.isEmpty()&&st.peek()>0&&st.peek()<Math.abs(num)){
                    st.pop();
                 }
