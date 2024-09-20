@@ -5,11 +5,11 @@ class Solution {
         for(int i=0;i<s.length();i++){
             if(s.charAt(i)=='A'){
                 acount++;
-                if(acount>1)return false;
+                if(acount>=2)return false;
             }
             if(s.charAt(i)=='L'){
                 lcount++;
-                if(lcount>2)return false;
+                if(lcount>=3)return false;
             }
             else{
                 lcount=0;
