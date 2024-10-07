@@ -1,5 +1,7 @@
 class Solution {
     public int minLength(String s) {
+        if(s.length() == 1)
+            return 1;
      Stack<Character>st=new Stack<>();
      for(int i=0;i<s.length();i++){
         char curr=s.charAt(i);
