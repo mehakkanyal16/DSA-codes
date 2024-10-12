@@ -24,10 +24,12 @@ class Solution {
         while(!q.isEmpty()){
         List<Integer>list=new ArrayList<>();
         int levelSize=q.size();
-        int val=0;
+        
         for(int i=0;i<levelSize;i++){
             TreeNode current=q.poll();
-            val=current.val;
+           if(i==levelSize-1){
+            result.add(current.val);
+           }
             if(current.left!=null){
                 q.offer(current.left);
             }
@@ -36,7 +38,7 @@ class Solution {
             }
            
         }
-        result.add(val);
+       
         }
         return result;
 
