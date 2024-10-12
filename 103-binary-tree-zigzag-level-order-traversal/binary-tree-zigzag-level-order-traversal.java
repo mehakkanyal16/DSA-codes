@@ -15,49 +15,45 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-    List<List<Integer>>result=new ArrayList<>();
-    if(root==null){
-        return result;
-    }
-    Deque<TreeNode>q=new LinkedList<>();
-    boolean reverse=false;
-    q.offer(root);
-    while(!q.isEmpty()){
-        int levelSize=q.size();
-     List<Integer>currentLevel=new ArrayList<>();
-     for(int i=0;i<levelSize;i++){
-        if(!reverse){
-             TreeNode current=q.pollFirst();
-                currentLevel.add(current.val);
-                if(current.left!=null){
-                    q.addLast(current.left);
+         List<List<Integer>>result=new ArrayList<>();
+         if(root==null){
+            return result;
+         }
+         boolean reverse=false;
+         Deque<TreeNode>q=new LinkedList<>();
+         q.offer(root);
+         while(!q.isEmpty()){
+            int levelSize=q.size();
+            List<Integer>currentLevel=new ArrayList<>();
+            for(int i=0;i<levelSize;i++){
+                if(!reverse){
+                    TreeNode current=q.pollFirst();
+                    currentLevel.add(current.val);
+                    if(current.left!=null){
+                        q.addLast(current.left);
+                    }
+                    if(current.right!=null){
+                        q.addLast(current.right);
+                    }
                 }
-                 if(current.right!=null){
-                    q.addLast(current.right);
+                else{
+                    TreeNode current=q.pollLast();
+                    currentLevel.add(current.val);
+                    if(current.right!=null){
+                        q.addFirst(current.right);
+                    }
+                    if(current.left!=null){
+                        q.addFirst(current.left);
+                    }
+                   
                 }
+               
+            }
+            result.add(currentLevel);
+             reverse=!reverse;
 
 
-
-        }else{
-
-            TreeNode current=q.pollLast();
-                currentLevel.add(current.val);
-                if(current.right!=null){
-                    q.addFirst(current.right);
-                }
-                if(current.left!=null){
-                    q.addFirst(current.left);
-                }
-             
-
-        }
-      
-     }
-     result.add(currentLevel);
-       reverse=!reverse;
-
-    }
-    return result;
-        
+         }
+         return result;
     }
 }
