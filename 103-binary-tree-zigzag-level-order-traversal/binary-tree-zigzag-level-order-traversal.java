@@ -15,45 +15,48 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-         List<List<Integer>>result=new ArrayList<>();
-         if(root==null){
+        List<List<Integer>>result=new ArrayList<>();
+        if(root==null){
             return result;
-         }
-         boolean reverse=false;
-         Deque<TreeNode>q=new LinkedList<>();
-         q.offer(root);
-         while(!q.isEmpty()){
+        }
+        boolean reverse=false;
+        Deque<TreeNode>q=new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
             int levelSize=q.size();
-            List<Integer>currentLevel=new ArrayList<>();
+            List<Integer>list=new ArrayList<>();
             for(int i=0;i<levelSize;i++){
+                
                 if(!reverse){
-                    TreeNode current=q.pollFirst();
-                    currentLevel.add(current.val);
-                    if(current.left!=null){
-                        q.addLast(current.left);
+                    TreeNode curr=q.pollFirst();
+                    list.add(curr.val);
+                    if(curr.left!=null){
+                        q.addLast(curr.left);
                     }
-                    if(current.right!=null){
-                        q.addLast(current.right);
+                    if(curr.right!=null){
+                        q.addLast(curr.right);
                     }
+                    
+
+                }else{
+                    TreeNode curr=q.pollLast();
+                    list.add(curr.val);
+                      if(curr.right!=null){
+                        q.addFirst(curr.right);
+                    }
+                    if(curr.left!=null){
+                        q.addFirst(curr.left);
+                    }
+                  
+
                 }
-                else{
-                    TreeNode current=q.pollLast();
-                    currentLevel.add(current.val);
-                    if(current.right!=null){
-                        q.addFirst(current.right);
-                    }
-                    if(current.left!=null){
-                        q.addFirst(current.left);
-                    }
-                   
-                }
-               
+                
             }
-            result.add(currentLevel);
-             reverse=!reverse;
+            result.add(list);
+            reverse=!reverse;
+           
 
-
-         }
-         return result;
+        }
+        return result;
     }
 }
