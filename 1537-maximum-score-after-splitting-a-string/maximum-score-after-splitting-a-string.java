@@ -1,22 +1,20 @@
 class Solution {
     public int maxScore(String s) {
-        int total_1=0;
-        int right_1=0;
-        int left_0=0;
-        int max=0;
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i)=='1'){
-                total_1++;
-            }
-        }
+        int ans=0;
         for(int i=0;i<s.length()-1;i++){
-            if(s.charAt(i)=='0'){
-                left_0++;
-            }else{
-                right_1++;
+            int curr=0;
+            for(int j=0;j<=i;j++){
+                if(s.charAt(j)=='0'){
+                    curr++;
+                }
             }
-            max=Math.max(max,left_0+(total_1-right_1));
+            for(int j=i+1;j<s.length();j++){
+                if(s.charAt(j)=='1'){
+                    curr++;
+                }
+            }
+            ans=Math.max(ans,curr);
         }
-        return max;
+        return ans;
     }
 }
