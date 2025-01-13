@@ -2,19 +2,23 @@ class Solution {
     public int minimumLength(String s) {
         int n=s.length();
         int count=0;
-        HashMap<Character,Integer>mp=new HashMap<>();
-        for(int i=0;i<n;i++){
+        int freq[]=new int[26];
+        for(int i=0;i<s.length();i++){
             char c=s.charAt(i);
-            mp.put(c,mp.getOrDefault(c,0)+1);
+            freq[c-'a']++;
         }
-        for(Map.Entry<Character,Integer>entry:mp.entrySet()){
-            if(entry.getValue()%2!=0){
-                count=count+ 1;
+        for(int frequency:freq){
+            if(frequency==0){
+                continue;
             }
-            if(entry.getValue()%2==0){
-                count=count+ 2;
+
+            if(frequency%2==0){
+                count=count+2;
+            }else{
+                count=count+1;
             }
         }
         return count;
+        
     }
 }
