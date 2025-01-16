@@ -3,14 +3,18 @@ class Solution {
      int left=0;
      int right=0;
      int max_len=0;
-     HashMap<Integer,Integer>mp=new HashMap<>();
+     int uniqueFruits=0;
+     int[] freq=new int[fruits.length];
      while(right<fruits.length){
-          mp.put(fruits[right],mp.getOrDefault(fruits[right],0)+1);
-          if(mp.size()>2){
-           while(mp.size()>2){
-             mp.put(fruits[left],mp.get(fruits[left])-1);
-             if(mp.get(fruits[left])==0){
-                mp.remove(fruits[left]);
+         if (freq[fruits[right]] == 0) {
+                uniqueFruits++; // A new fruit type is added to the window
+            }
+            freq[fruits[right]]++;
+          if(uniqueFruits>2){
+           while(uniqueFruits>2){
+               freq[fruits[left]]--;
+             if(freq[fruits[left]]==0){
+                uniqueFruits--;
              }
              left++;
            }
