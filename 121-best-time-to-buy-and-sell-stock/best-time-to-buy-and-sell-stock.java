@@ -7,10 +7,9 @@ class Solution {
                 min_price=nums[i];
             }else if(nums[i]-min_price>max_profit){
                 max_profit=nums[i]-min_price;
+
             }
-            
         }
         return max_profit;
-        
     }
 }
