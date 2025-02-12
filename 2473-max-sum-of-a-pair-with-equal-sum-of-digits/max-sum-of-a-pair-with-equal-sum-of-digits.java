@@ -16,12 +16,10 @@ class Solution {
             int sum=digitSum(nums[i]);
             if(mp.containsKey(sum)){
                 maxSum=Math.max(maxSum,nums[i]+mp.get(sum));
-                mp.put(sum, Math.max(mp.get(sum), nums[i]));
+                // mp.put(sum, Math.max(mp.get(sum), nums[i]));
   
-            }else{
-                mp.put(sum,nums[i]);
-
             }
+            mp.put(sum, Math.max(mp.getOrDefault(sum, 0), nums[i]));
         }
         return maxSum;
         
