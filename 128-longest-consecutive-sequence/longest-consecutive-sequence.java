@@ -4,20 +4,19 @@ class Solution {
             return 0;
         }
         Arrays.sort(nums);
-        int n=nums.length;
-        int cnt=1;
-        ArrayList<Integer>al=new ArrayList<>();
-        for(int i=0;i<n-1;i++){
-          
-            if(nums[i]+1==nums[i+1]){
-                cnt++;
-            }else if(nums[i]!=nums[i+1]){
-                al.add(cnt);
-                cnt=1;
+        int maxcount=1;
+        int currentcount=1;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]==nums[i-1]){
+                continue;
+            }
+            else if(nums[i]==nums[i-1]+1){
+                currentcount++;
+            }else{
+                maxcount=Math.max(currentcount,maxcount);
+                currentcount=1;
             }
         }
-        al.add(cnt);
-        return Collections.max(al);
+        return Math.max(currentcount,maxcount);
     }
-
 }
