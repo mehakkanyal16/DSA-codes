@@ -1,5 +1,5 @@
 class Solution {
-    public static boolean binarySearch(int[] row ,int target){
+    public static boolean binarySearch(int[] row,int target){
         int start=0;
         int end=row.length-1;
          while (start <= end) {  // Corrected condition (<=)
@@ -17,12 +17,25 @@ class Solution {
 
     }
     public boolean searchMatrix(int[][] matrix, int target) {
-        for(int i=0;i<matrix.length;i++){
-          if(binarySearch(matrix[i],target)){
-            return true;
-          }
+        int start=0;
+        int end=matrix.length-1;
+        while(start<=end){
+            int mid=start+(end-start)/2;
+            if(target>=matrix[mid][0]&&target<=matrix[mid][matrix[mid].length - 1]){
+                // search in current row
+                return binarySearch(matrix[mid],target);
+
+
+            }else if(target > matrix[mid][matrix[mid].length - 1]){
+                // search in down
+                start=mid+1;
+            }else{
+                // search in up
+                end=mid-1;
+            }
         }
         return false;
         
+
     }
 }
