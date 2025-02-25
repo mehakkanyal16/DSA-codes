@@ -1,42 +1,32 @@
 class Solution {
-    public static int[] merge(int[] nums1,int[] nums2){
-        int n=nums1.length;
-        int m=nums2.length;
-        int[] res=new int[n+m];
-        int i=0;
-        int j=0;
-        int idx=0;
-        while (i < n && j < m) {
-            if (nums1[i] < nums2[j]) {
-                res[idx++] = nums1[i++];
-            } else {
-                res[idx++] = nums2[j++];
-            }
-        }
-        while(i<n){
-            res[idx++]=nums1[i];
-            i++;
-        }
-        while(j<m){
-            res[idx++]=nums2[j];
-            j++;
-        }
-        return res;
-
-
-
-    }
+  
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
           int n=nums1.length;
         int m=nums2.length;
-        int[] res=new int[n+m];
-         res=merge(nums1,nums2);
-         if(res.length%2!=0){
-            return (double)(res[res.length/2]);
+        int total_len=n+m;
+        int midIndex=total_len/2;
+        int count=0;
+        int i=0,j=0;
+        int curr=0;
+        int prev=0;
+        while(count<=midIndex){
+            prev=curr;
+             if((i < n && (j >= m || nums1[i] < nums2[j])) ){
+                curr=nums1[i];
+                i++;
+            
+              }else{
+                curr=nums2[j];
+                j++;
+              }
+              count++;
+        }
+         if (total_len % 2 != 0) {
+            return curr;
+        }
 
-         }else{
-            return (double)(res[res.length/2]+res[res.length/2-1])/2;
-         }
+        // If even, return the average of the two middle elements
+        return (prev + curr) / 2.0;
 
         
     }
