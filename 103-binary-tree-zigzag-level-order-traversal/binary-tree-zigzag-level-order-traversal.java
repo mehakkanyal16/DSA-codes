@@ -19,14 +19,14 @@ class Solution {
         if(root==null){
             return result;
         }
-        boolean reverse=false;
+          boolean reverse=false;
         Deque<TreeNode>q=new LinkedList<>();
         q.offer(root);
         while(!q.isEmpty()){
+          
             int levelSize=q.size();
             List<Integer>list=new ArrayList<>();
             for(int i=0;i<levelSize;i++){
-                
                 if(!reverse){
                     TreeNode curr=q.pollFirst();
                     list.add(curr.val);
@@ -36,27 +36,24 @@ class Solution {
                     if(curr.right!=null){
                         q.addLast(curr.right);
                     }
-                    
-
                 }else{
-                    TreeNode curr=q.pollLast();
+                   TreeNode curr=q.pollLast();
                     list.add(curr.val);
-                      if(curr.right!=null){
+                    if(curr.right!=null){
                         q.addFirst(curr.right);
                     }
                     if(curr.left!=null){
                         q.addFirst(curr.left);
                     }
-                  
-
                 }
-                
-            }
-            result.add(list);
-            reverse=!reverse;
-           
+              
 
+            }
+              reverse=!reverse;
+             result.add(list);
+      
         }
         return result;
+        
     }
 }
