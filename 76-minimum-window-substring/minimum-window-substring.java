@@ -3,8 +3,8 @@ class Solution {
         int left=0;
         int right=0;
         int sIndex=-1;
-        int min_len=Integer.MAX_VALUE;
         int count=0;
+        int min_len=Integer.MAX_VALUE;
         int[] hash=new int[256];
         for(int i=0;i<t.length();i++){
             hash[t.charAt(i)]++;
@@ -12,9 +12,9 @@ class Solution {
         while(right<s.length()){
             if(hash[s.charAt(right)]>0){
                 count++;
+              
             }
-            hash[s.charAt(right)]--;
-            
+               hash[s.charAt(right)]--;
             while(count==t.length()){
                 if((right-left+1)<min_len){
                     min_len=right-left+1;
@@ -24,14 +24,13 @@ class Solution {
                 if(hash[s.charAt(left)]>0){
                     count--;
                 }
-                 left++;
+                left++;
 
             }
             right++;
-
+      
         }
         return sIndex==-1?"":s.substring(sIndex,sIndex+min_len);
-
         
     }
 }
