@@ -17,8 +17,21 @@ class Solution {
         int n=nums.length;
         int[] dp=new int[n+1];
         Arrays.fill(dp,-1);
+        dp[0]=nums[0];
+     
 
-        return f(nums,n-1,dp);
+        for(int i=1;i<n;i++){
+            int take=nums[i];
+            if(i>1){
+             take=nums[i]+dp[i-2];
+            }
+             
+             int not_take=0+dp[i-1];
+             dp[i]=Math.max(take,not_take);
+
+        }
+
+        return dp[n-1];
         
     }
 }
