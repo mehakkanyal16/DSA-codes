@@ -1,38 +1,40 @@
 class Solution {
-     static boolean f(int ind,int[] arr,int k,int[][] dp){
-          if(k==0){
+    public boolean f(int[] nums,int ind,int[][] dp,int k){
+        if(ind==0){
+            return (nums[ind]==k);
+        }
+        if(k==0){
             return true;
         }
-        if(ind==0){
-            return (arr[ind]==k);
-        }
-      
         if(dp[ind][k]!=-1){
             return dp[ind][k]==0?false:true;
         }
-        boolean not_pick=f(ind-1,arr,k,dp);
+        boolean notPick=f(nums,ind-1,dp,k);
         boolean pick=false;
-        if(arr[ind]<=k){
-        pick=f(ind-1,arr,k-arr[ind],dp);
+        if(k>=nums[ind]){
+            pick=f(nums,ind-1,dp,k-nums[ind]);
         }
-        dp[ind][k]=not_pick||pick?1:0;
-        return pick||not_pick;
-        
+        dp[ind][k]=pick||notPick?1:0;
+        return pick||notPick;
     }
     public boolean canPartition(int[] nums) {
         int n=nums.length;
-        int totSum=0;
-        for(int i=0;i<n;i++){
-            totSum=totSum+nums[i];
-        }
-        if(totSum%2!=0){
+        if(n==0){
             return false;
         }
-        int k=totSum/2;
-      int[][] dp=new int[n][k+1];
-     for(int it[]:dp){
-         Arrays.fill(it,-1);
-     }
-     return f(n-1,nums,k,dp);
+        int totalSum=0;
+        for(int i=0;i<n;i++){
+            totalSum+=nums[i];
+        }
+        if(totalSum%2!=0){
+            return false;
+        }
+        int k=totalSum/2;
+        int dp[][]=new int[n][k+1];
+        for(int it[]:dp){
+            Arrays.fill(it,-1);
+        }
+        return f(nums,n-1,dp,k);
+        
     }
 }
