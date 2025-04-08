@@ -1,5 +1,5 @@
 class Solution {
-    public int f(int ind,int[] nums,int[] dp){
+    public int f(int[] nums,int ind,int[] dp){
         if(ind==0){
             return nums[ind];
         }
@@ -9,15 +9,16 @@ class Solution {
         if(dp[ind]!=-1){
             return dp[ind];
         }
-        int pick=nums[ind]+f(ind-2,nums,dp);
-        int not_pick=0+f(ind-1,nums,dp);
-        return  dp[ind]=Math.max(pick,not_pick);
+        int pick=nums[ind]+f(nums,ind-2,dp);
+        int not_pick=0+f(nums,ind-1,dp);
+        return dp[ind]=Math.max(pick,not_pick);
     }
     public int rob(int[] nums) {
         int n=nums.length;
-        int[] dp=new int[n];
+        int[] dp=new int[n+1];
         Arrays.fill(dp,-1);
-        return f(n-1,nums,dp);
 
+        return f(nums,n-1,dp);
+        
     }
 }
