@@ -22,12 +22,13 @@ class Solution {
         ListNode prevNode=reverseKGroup(temp,k);
         temp=head;
         cnt=0;
+
         while(cnt<k){
             ListNode next=temp.next;
             temp.next=prevNode;
             prevNode=temp;
             temp=next;
-           cnt++;
+            cnt++;
         }
         return prevNode;
         
