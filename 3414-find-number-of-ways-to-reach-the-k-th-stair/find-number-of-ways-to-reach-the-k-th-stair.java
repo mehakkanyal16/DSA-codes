@@ -2,9 +2,7 @@ class Solution {
     HashMap<String,Integer>dp;
     public int waysToReachStair(int k) {
         dp=new HashMap<>();
-        
         return solve(1,k,0,1);
-        
     }
     public int solve(int i,int k,int jumps,int canJump){
         int ways=0;
@@ -20,6 +18,5 @@ class Solution {
         ways+=solve((int)(i+Math.pow(2,jumps)),k,jumps+1,1);
         dp.put(key,ways);
         return ways;
-
     }
 }
