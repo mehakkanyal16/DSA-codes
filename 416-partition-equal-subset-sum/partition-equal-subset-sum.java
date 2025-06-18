@@ -1,40 +1,30 @@
 class Solution {
-    public boolean f(int[] nums,int ind,int[][] dp,int k){
-        if(ind==0){
-            return (nums[ind]==k);
+    public boolean solve(int[] nums,int i,int k,Boolean[][]dp){
+        if(k==0)return true;
+        if(i==0) return nums[i]==k;
+        if(dp[i][k]!=null){
+            return dp[i][k];
         }
-        if(k==0){
-            return true;
-        }
-        if(dp[ind][k]!=-1){
-            return dp[ind][k]==0?false:true;
-        }
-        boolean notPick=f(nums,ind-1,dp,k);
+        boolean not_pick=solve(nums,i-1,k,dp);
         boolean pick=false;
-        if(k>=nums[ind]){
-            pick=f(nums,ind-1,dp,k-nums[ind]);
+        if(k>=nums[i]){
+            pick=solve(nums,i-1,k-nums[i],dp);
         }
-        dp[ind][k]=pick||notPick?1:0;
-        return pick||notPick;
+        return dp[i][k]=pick||not_pick;
+
     }
     public boolean canPartition(int[] nums) {
         int n=nums.length;
-        if(n==0){
-            return false;
-        }
-        int totalSum=0;
+        int sum=0;
         for(int i=0;i<n;i++){
-            totalSum+=nums[i];
+            sum+=nums[i];
         }
-        if(totalSum%2!=0){
+        if(sum%2!=0){
             return false;
         }
-        int k=totalSum/2;
-        int dp[][]=new int[n][k+1];
-        for(int it[]:dp){
-            Arrays.fill(it,-1);
-        }
-        return f(nums,n-1,dp,k);
+       Boolean[][] dp=new Boolean[n][sum+1];
+       
+        return solve(nums,n-1,sum/2,dp);
         
     }
 }
