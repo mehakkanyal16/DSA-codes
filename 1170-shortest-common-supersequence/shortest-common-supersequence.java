@@ -1,56 +1,49 @@
 class Solution {
     public String shortestCommonSupersequence(String str1, String str2) {
-        String res = "";
-        try{
-            Callable<String> task = () -> generateLCS(str1, str2);
-            FutureTask<String> future = new FutureTask<>(task);
-            new Thread(future).start();
-            res = future.get();
+        int n=str1.length();
+        int m=str2.length();
+        int[][] dp=new int[n+1][m+1];
+        for(int i=0;i<=n;i++){
+            dp[i][0]=0;
         }
-        catch(Exception e){
+        for(int j=0;j<=m;j++){
+            dp[0][j]=0;
+        }
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                if(str1.charAt(i-1)==str2.charAt(j-1)){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }else{
+                    dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
+        }
+        int i=n;
+        int j=m;
+      StringBuilder ans = new StringBuilder();
+        while(i>0&&j>0){
+            if(str1.charAt(i-1)==str2.charAt(j-1)){
+               ans.append(str1.charAt(i - 1));
+                i--;
+                j--;
+            }else if(dp[i-1][j]>dp[i][j-1]){
+                ans.append(str1.charAt(i - 1));
+                i--;
+            }else{
+              ans.append(str2.charAt(j - 1));
+                 j--;
+            }
 
         }
-        return res;
-    }
-    public String generateLCS(String str1, String str2){
-        int m = str1.length();
-        int n = str2.length();
-        int[][] lcsMatrix = new int[m + 1][n + 1];
-        for(int i = 1; i <= m; i++){
-            for(int j = 1; j <= n; j++){
-                if(str1.charAt(i - 1) == str2.charAt(j - 1)){
-                    lcsMatrix[i][j] = lcsMatrix[i - 1][j - 1] + 1;
-                }
-                else{
-                    lcsMatrix[i][j] = Math.max(lcsMatrix[i - 1][j], lcsMatrix[i][j - 1]);
-                }
-            }
+        while(i>0){
+            ans.append(str1.charAt(i - 1));
+            i--;
         }
-        int row = m, col = n;
-        StringBuilder ans = new StringBuilder();
-        while(row > 0 && col > 0){
-            if(str1.charAt(row - 1) == str2.charAt(col - 1)){
-                ans.append(str1.charAt(row - 1));
-                row--;
-                col--;
-            }
-            else if(lcsMatrix[row - 1][col] > lcsMatrix[row][col - 1]){
-                ans.append(str1.charAt(row - 1));
-                row--;
-            }
-            else{
-                ans.append(str2.charAt(col - 1));
-                col--;
-            }
-        }
-        while(row > 0){
-            ans.append(str1.charAt(row - 1));
-            row--;
-        }
-        while(col > 0){
-            ans.append(str2.charAt(col - 1));
-            col--;
+        while(j>0){
+         ans.append(str2.charAt(j - 1));
+            j--;
         }
         return ans.reverse().toString();
+        
     }
 }
