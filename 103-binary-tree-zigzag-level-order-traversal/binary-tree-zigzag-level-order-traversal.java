@@ -15,45 +15,43 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>>result=new ArrayList<>();
-        if(root==null){
-            return result;
-        }
-          boolean reverse=false;
+        List<List<Integer>>list=new ArrayList<>();
+        if(root==null)return list;
         Deque<TreeNode>q=new LinkedList<>();
-        q.offer(root);
+        q.add(root);
+        boolean reverse=false;
         while(!q.isEmpty()){
+            int size = q.size();
+            List<Integer> level = new ArrayList<>();
+           
+           for(int i=0;i<size;i++){
           
-            int levelSize=q.size();
-            List<Integer>list=new ArrayList<>();
-            for(int i=0;i<levelSize;i++){
-                if(!reverse){
-                    TreeNode curr=q.pollFirst();
-                    list.add(curr.val);
-                    if(curr.left!=null){
-                        q.addLast(curr.left);
-                    }
-                    if(curr.right!=null){
-                        q.addLast(curr.right);
-                    }
-                }else{
-                   TreeNode curr=q.pollLast();
-                    list.add(curr.val);
-                    if(curr.right!=null){
-                        q.addFirst(curr.right);
-                    }
-                    if(curr.left!=null){
-                        q.addFirst(curr.left);
-                    }
-                }
-              
+            if(!reverse){
+                  TreeNode curr=q.pollFirst();
+                  level.add(curr.val);
 
-            }
-              reverse=!reverse;
-             result.add(list);
-      
+             if(curr.left!=null)q.addLast(curr.left);
+            if(curr.right!=null)q.addLast(curr.right);
+           }else{
+
+             TreeNode curr=q.pollLast();
+             level.add(curr.val);
+
+            
+            if(curr.right!=null)q.addFirst(curr.right);
+             if(curr.left!=null)q.addFirst(curr.left);
+
+           }
+
+          
+
+           }
+            reverse=!reverse;
+           list.add(level);
+
         }
-        return result;
+        return list;
+
         
     }
 }
