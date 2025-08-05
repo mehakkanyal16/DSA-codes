@@ -1,30 +1,21 @@
 class Solution {
     public int totalFruit(int[] fruits) {
-     int left=0;
-     int right=0;
-     int max_len=0;
-     int uniqueFruits=0;
-     int[] freq=new int[fruits.length];
-     while(right<fruits.length){
-         if (freq[fruits[right]] == 0) {
-                uniqueFruits++; // A new fruit type is added to the window
+        HashMap<Integer,Integer>mp=new HashMap<>();
+        int n=fruits.length;
+        int left=0;
+        int max=0;
+        for(int right=0;right<n;right++){
+            mp.put(fruits[right],mp.getOrDefault(fruits[right],0)+1);
+            if(mp.size()>2){
+               mp.put(fruits[left],mp.get(fruits[left])-1);
+               if(mp.get(fruits[left])==0){
+                mp.remove(fruits[left]);
+               }
+               left++;
             }
-            freq[fruits[right]]++;
-          if(uniqueFruits>2){
-           while(uniqueFruits>2){
-               freq[fruits[left]]--;
-             if(freq[fruits[left]]==0){
-                uniqueFruits--;
-             }
-             left++;
-           }
-          }
-          
-            max_len=Math.max(max_len,right-left+1);
-            right++;
-       
+            max=Math.max(max,right-left+1);
 
-     }
-     return max_len;
+        }
+        return max;
     }
 }
