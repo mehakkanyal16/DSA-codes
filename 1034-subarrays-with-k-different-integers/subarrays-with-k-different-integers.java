@@ -3,7 +3,7 @@ class Solution {
          int left=0;
          int unique=0;
          int cnt=0;
-       int[] freq = new int[20001];  // Based on constraints: nums[i] ≤ 20000
+       int[] freq = new int[nums.length+1];  // Based on constraints: nums[i] ≤ 20000
 
          for(int right=0;right<nums.length;right++){
             if(freq[nums[right]]==0){
