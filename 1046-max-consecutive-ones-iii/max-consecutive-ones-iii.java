@@ -3,19 +3,16 @@ class Solution {
         int n=nums.length;
         int zeroes=0;
         int left=0;
-        int max=0;
+        int maxCnt=0;
         for(int right=0;right<n;right++){
-            if(nums[right]==0){
-                zeroes++;
-            }
+            if(nums[right]==0)zeroes++;
             if(zeroes>k){
-                if(nums[left]==0){
-                    zeroes--;
-                }
-                left++;
+              if(nums[left]==0)zeroes--;
+              left++;
             }
-            max=Math.max(max,right-left+1);
+            maxCnt=Math.max(maxCnt,right-left+1);
         }
-        return max;
+        return maxCnt;
     }
+
 }
