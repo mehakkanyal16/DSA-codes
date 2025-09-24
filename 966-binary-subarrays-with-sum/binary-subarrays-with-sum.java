@@ -1,18 +1,25 @@
 class Solution {
-    public int numSubarraysWithSum(int[] nums, int goal) {
-       int cnt=0;
-       for(int i=0;i<nums.length;i++){
-        int sum=0;
-        for(int j=i;j<nums.length;j++){
-            sum+=nums[j];
-            if(sum==goal){
+    private int atMost(int[] nums, int goal) {
+        if (goal < 0) return 0;  // important edge case
+        int n = nums.length;
+        int cnt = 0;
+        int currSum = 0, left = 0;
 
-                cnt++;
-               
+        for (int right = 0; right < n; right++) {
+            currSum += nums[right];
 
+            // ✅ Shrink window only if sum > goal
+            while (currSum > goal) {
+                currSum -= nums[left++];
             }
+
+            // ✅ Count all subarrays ending at right
+            cnt += (right - left + 1);
         }
-       }
-       return cnt;
+        return cnt;
+    }
+
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        return atMost(nums, goal) - atMost(nums, goal - 1);
     }
 }
