@@ -1,7 +1,17 @@
 class Solution {
-  
     public int lastRemaining(int n) {
-     return n == 1 ? 1 : (n / 2 - lastRemaining(n / 2) + 1) * 2;
+        int head=1;
+        int step=1;
+        boolean leftToRight=true;
+        while(n>1){
+            if(leftToRight||n%2==1){
+                head+=step;
+            }
+            step*=2;
+            n/=2;
+            leftToRight=!leftToRight;
 
+        }
+        return head;
     }
 }
