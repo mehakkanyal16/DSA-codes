@@ -14,26 +14,27 @@
  * }
  */
 class Solution {
+    int postIdx;
     public TreeNode buildTree(int[] inorder, int[] postorder) {
-        if(inorder==null||postorder==null||inorder.length!=postorder.length){
-            return null ;
-        }
-        HashMap<Integer,Integer>mp=new HashMap<>();
-        for(int i=0;i<inorder.length;i++){
-            mp.put(inorder[i],i);
-        }
-        return buildTree(inorder,0,inorder.length-1,postorder,0,postorder.length-1,mp);
+        postIdx=postorder.length-1;
+        return helper(inorder,postorder,0,inorder.length-1);
         
     }
-    public TreeNode buildTree(int[] inorder,int is,int ie,int[] postorder,int ps,int pe,HashMap<Integer,Integer>mp){
-        if(is>ie||ps>pe){
-            return null;
-        }
-        TreeNode root=new TreeNode(postorder[pe]);
-        int inroot=mp.get(postorder[pe]);
-        int numsleft=inroot-is;
-        root.left=buildTree(inorder,is,inroot-1,postorder,ps,ps+numsleft-1,mp);
-        root.right=buildTree(inorder,inroot+1,ie,postorder,ps+numsleft,pe-1,mp);
+    public TreeNode helper(int[] inorder,int[] postorder ,int left,int right){
+        if(left>right)return null;
+        TreeNode root=new TreeNode(postorder[postIdx]);
+        int idx=search(inorder,left,right,postorder[postIdx]);
+        postIdx--;
+        root.right=helper(inorder,postorder,idx+1,right);
+        root.left=helper(inorder,postorder,left,idx-1);
         return root;
+       
+
+    } 
+    public int search(int[] inorder,int left,int right,int key){
+        for(int i=left;i<=right;i++){
+            if(inorder[i]==key)return i;
+        }
+        return -1;
     }
 }
