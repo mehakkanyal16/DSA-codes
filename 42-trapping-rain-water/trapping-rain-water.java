@@ -14,18 +14,17 @@ class Solution {
 
                 }
                 left++;
-            }
-            else {
+            }else {
                 if(height[right]>=rightMax){
                     rightMax=height[right];
+
                 }else{
                     res+=rightMax-height[right];
-
                 }
                 right--;
             }
-            
         }
         return res;
+
     }
 }
