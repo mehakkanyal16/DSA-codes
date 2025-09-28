@@ -3,14 +3,14 @@ class Solution {
         Stack<Character>st=new Stack<>();
         for(char ch:s.toCharArray()){
             if(ch==')'){
-                if(!st.empty()&&st.peek()=='('){
+                if(!st.isEmpty()&&st.peek()=='('){
                     st.pop();
-                }
-                else{
+
+                }else{
                     st.push(ch);
                 }
-            }
-            else{
+
+            }else{
                 st.push(ch);
             }
         }
