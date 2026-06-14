@@ -6,16 +6,19 @@ class Solution {
             if(!Character.isLetterOrDigit(s.charAt(start))){
                 start++;
                 continue;
-            }else if(!Character.isLetterOrDigit(s.charAt(end))){
+            }
+            else if(!Character.isLetterOrDigit(s.charAt(end))){
                 end--;
                 continue;
-            }else if(Character.toLowerCase(s.charAt(start))!=Character.toLowerCase(s.charAt(end))){
+            }
+            else if(Character.toLowerCase(s.charAt(start))!=Character.toLowerCase(s.charAt(end)) ){
                 return false;
             }else{
                 start++;
                 end--;
             }
         }
+
         return true;
         
     }
