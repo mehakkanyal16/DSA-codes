@@ -6,17 +6,16 @@ class Solution {
             char ch=s.charAt(i);
             mp.put(ch,mp.getOrDefault(ch,0)+1);
         }
-     
-        PriorityQueue<Map.Entry<Character,Integer>>pq=new PriorityQueue<>((a,b)->b.getValue()-a.getValue());
-        pq.addAll(mp.entrySet());
+        PriorityQueue<Character>pq=new PriorityQueue<>((a,b)->mp.get(b)-mp.get(a));
+        pq.addAll(mp.keySet());
 
         while(!pq.isEmpty()){
-             Map.Entry<Character,Integer>entry=pq.poll();
-        char ch=entry.getKey();
-        int freq=entry.getValue();
-        for(int i=0;i<freq;i++){
-            sb.append(ch);
-        }
+            char ch=pq.poll();
+            int frq=mp.get(ch);
+            while(frq>0){
+                sb.append(ch);
+                frq--;
+            }
         }
         return sb.toString();
     }
