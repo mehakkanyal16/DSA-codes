@@ -20,15 +20,13 @@ public class Solution {
                 break;
             }
         }
-
-        if (fast == null || fast.next == null) return null;
-        // After the loop, if fast has reached the end of the list (fast == null or fast.next == null), it means there's no cycle in the list.
-
+        if(fast==null||fast.next==null)return null;
         while(head!=slow){
             head=head.next;
             slow=slow.next;
+
         }
-        return head;
+        return slow;
         
     }
 }
