@@ -1,25 +1,24 @@
 class Solution {
-    private int atMost(int[] nums, int goal) {
-        if (goal < 0) return 0;  // important edge case
-        int n = nums.length;
-        int cnt = 0;
-        int currSum = 0, left = 0;
+    public int numSubarraysWithSum(int[] nums, int goal) {
 
-        for (int right = 0; right < n; right++) {
-            currSum += nums[right];
+        HashMap<Integer, Integer> map = new HashMap<>();
 
-            // ✅ Shrink window only if sum > goal
-            while (currSum > goal) {
-                currSum -= nums[left++];
+        map.put(0, 1);
+
+        int sum = 0;
+        int ans = 0;
+
+        for (int num : nums) {
+
+            sum += num;
+
+            if (map.containsKey(sum - goal)) {
+                ans += map.get(sum - goal);
             }
 
-            // ✅ Count all subarrays ending at right
-            cnt += (right - left + 1);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
-        return cnt;
-    }
 
-    public int numSubarraysWithSum(int[] nums, int goal) {
-        return atMost(nums, goal) - atMost(nums, goal - 1);
+        return ans;
     }
 }
