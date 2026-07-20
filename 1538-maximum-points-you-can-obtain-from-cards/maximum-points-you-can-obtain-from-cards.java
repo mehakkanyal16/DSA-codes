@@ -1,31 +1,29 @@
 class Solution {
     public int maxScore(int[] nums, int k) {
-        int n = nums.length;
-        int windowSize = n - k;
-        int windowSum = 0;
-        int totalSum = 0;
-        int left = 0;
-        int maxi = Integer.MIN_VALUE;
-
-        for (int num : nums) {
-            totalSum += num;
+        int totSum=0;
+        for(int num:nums ){
+            totSum+=num;
         }
+        int n=nums.length;
+        int left=0;
+        int windowSize=n-k;
+        int currSum=0;
+        int max=Integer.MIN_VALUE;
 
-       
-        if (k == n) {
-            return totalSum;
-        }
+        if (n==0)return 0;
+        if(k==n)return totSum;
+        for(int right=0;right<nums.length;right++){
+            currSum+=nums[right];
 
-        for (int right = 0; right < n; right++) {
-            windowSum += nums[right];
-
-            if (right - left + 1 == windowSize) {
-                maxi = Math.max(maxi, totalSum - windowSum);
-                windowSum -= nums[left];
-                left++;
+            if((right-left+1)==windowSize){
+                max=Math.max(max,totSum-currSum);
+                currSum-=nums[left];
+                left=left+1;
             }
-        }
 
-        return maxi;
+
+        }
+        return max;
+        
     }
 }
