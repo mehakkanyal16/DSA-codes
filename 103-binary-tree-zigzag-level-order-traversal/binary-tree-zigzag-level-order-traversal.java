@@ -15,43 +15,45 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>>list=new ArrayList<>();
-        if(root==null)return list;
-        Deque<TreeNode>q=new LinkedList<>();
+        List<List<Integer>> res = new ArrayList<>();
+
+        if (root == null)
+            return res;
+
+        Deque<TreeNode> q = new LinkedList<>();
         q.add(root);
-        boolean reverse=false;
-        while(!q.isEmpty()){
+        boolean rev = false;
+
+        while (!q.isEmpty()) {
             int size = q.size();
-            List<Integer> level = new ArrayList<>();
-           
-           for(int i=0;i<size;i++){
-          
-            if(!reverse){
-                  TreeNode curr=q.pollFirst();
-                  level.add(curr.val);
+            List<Integer> list = new ArrayList<>();
 
-             if(curr.left!=null)q.addLast(curr.left);
-            if(curr.right!=null)q.addLast(curr.right);
-           }else{
+            for (int i = 0; i < size; i++) {
 
-             TreeNode curr=q.pollLast();
-             level.add(curr.val);
+                if (!rev) {
+                    TreeNode curr = q.pollLast();
+                    list.add(curr.val);
+                    if (curr.left != null)
+                        q.addFirst(curr.left);
+                    if (curr.right != null)
+                        q.addFirst(curr.right);
+                }
 
-            
-            if(curr.right!=null)q.addFirst(curr.right);
-             if(curr.left!=null)q.addFirst(curr.left);
+                if (rev) {
+                    TreeNode curr = q.pollFirst();
+                    list.add(curr.val);
+                    if (curr.right != null)
+                        q.addLast(curr.right);
+                    if (curr.left != null)
+                        q.addLast(curr.left);
+                }
 
-           }
-
-          
-
-           }
-            reverse=!reverse;
-           list.add(level);
+            }
+            res.add(list);
+            rev = !rev;
 
         }
-        return list;
+        return res;
 
-        
     }
 }
